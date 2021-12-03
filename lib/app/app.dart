@@ -1,6 +1,4 @@
-
-import 'package:adaptive_theme/adaptive_theme.dart';
-
+import 'package:first/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './modCalculator.dart';
@@ -8,11 +6,9 @@ import './modCalculator.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Modder'),
-
         centerTitle: true,
         actions: [
           PopupMenuButton(
@@ -20,14 +16,16 @@ class App extends StatelessWidget {
               PopupMenuItem(
                 enabled: false,
                 child: ListTile(
-
-                  title: Text(
-                    'Dark Mode',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text(
+                      'Dark Mode',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                  trailing: buildSwitch(isDarkMode),
+                  trailing: buildSwitch(),
                 ),
               ),
             ],
@@ -38,22 +36,19 @@ class App extends StatelessWidget {
     );
   }
 
-  StatefulBuilder buildSwitch(bool isDarkMode) {
+  StatefulBuilder buildSwitch() {
     return StatefulBuilder(
-      builder: (context, setState) {
+      builder: (BuildContext context, StateSetter setState) {
         return Switch(
-          value: isDarkMode,
+          value: context.read<ThemeProvider>().isDarkMode,
+          // backward compatible code
+          // value: Provider.of<ThemeProvider>(context).isDarkMode,
           onChanged: (value) {
-            if (value == false) {
-              AdaptiveTheme.of(context).setLight();
-            } else {
-              AdaptiveTheme.of(context).setDark();
-            }
-
-            setState(() {
-              isDarkMode = !isDarkMode;
-            });
-
+            context.read<ThemeProvider>().toggle(value);
+            // backward compatible code
+            // Provider.of<ThemeProvider>(context, listen: false)
+            //     .toggle(value);
+            setState(() {});
           },
         );
       },
