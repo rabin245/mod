@@ -1,5 +1,5 @@
 name: first
-description: A new Flutter project.
+description: Flutter application to calculate mod
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -17,6 +17,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 0.0.3+1
 
+
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
@@ -24,6 +25,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+#  state management
+  provider: ^6.0.1
+#  for local storage
+  shared_preferences: ^2.0.9
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

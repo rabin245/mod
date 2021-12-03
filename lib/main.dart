@@ -1,4 +1,6 @@
+import 'package:first/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'app/app.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
@@ -28,5 +30,6 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+
   }
 }

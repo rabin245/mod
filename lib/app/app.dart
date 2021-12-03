@@ -1,16 +1,18 @@
+
 import 'package:adaptive_theme/adaptive_theme.dart';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './modCalculator.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = AdaptiveTheme.of(context).mode == AdaptiveThemeMode.dark;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Modder'),
+        title: const Text('Modder'),
+
         centerTitle: true,
         actions: [
           PopupMenuButton(
@@ -18,6 +20,7 @@ class App extends StatelessWidget {
               PopupMenuItem(
                 enabled: false,
                 child: ListTile(
+
                   title: Text(
                     'Dark Mode',
                     style: TextStyle(
@@ -50,6 +53,7 @@ class App extends StatelessWidget {
             setState(() {
               isDarkMode = !isDarkMode;
             });
+
           },
         );
       },
