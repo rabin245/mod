@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ModInput extends StatelessWidget {
   final onKeyUp;
+
   const ModInput({Key? key, this.onKeyUp}) : super(key: key);
 
   @override

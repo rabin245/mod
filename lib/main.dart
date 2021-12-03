@@ -2,33 +2,34 @@ import 'package:first/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app/app.dart';
-import 'package:provider/provider.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // portrait only
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
-  runApp(MyApp());
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  runApp(MyApp(savedThemeMode: savedThemeMode));
 }
 
 class MyApp extends StatelessWidget {
+  final AdaptiveThemeMode? savedThemeMode;
+  MyApp({this.savedThemeMode});
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => ThemeProvider(),
-        builder: (context, child) {
-          final themeProvider = Provider.of<ThemeProvider>(context);
-          return MaterialApp(
-            title: 'Modder',
-            debugShowCheckedModeBanner: false,
-            themeMode:
-                themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            theme: MyThemes.light,
-            darkTheme: MyThemes.dark,
-            home: App(),
-          );
-        });
+    return AdaptiveTheme(
+      light: ThemeData.light(),
+      dark: ThemeData.dark(),
+      initial: savedThemeMode ?? AdaptiveThemeMode.light,
+      builder: (theme, darkTheme) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Modder',
+          theme: theme,
+          darkTheme: darkTheme,
+          home: App(),
+        );
+      },
+    );
+
   }
 }
