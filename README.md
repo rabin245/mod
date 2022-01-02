@@ -5,11 +5,7 @@ Mobile Application to calculate modulus and quotient
 
 ![Screenshot](/screenshots/Modder_0.0.2.png)
 
-# light theme
+# light & dark theme
 
-![Light theme](/screenshots/light_theme.png)
+<img src="screenshots/light_theme.png" alt="screenshot" height="800"> <img src="screenshots/dark_theme.png" alt="screenshot" height="800">
 
-
-# dark theme
-
-![Dark theme](/screenshots/dark_theme.png)
